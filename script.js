@@ -1,0 +1,229 @@
+// Override console.log to display in the output panel
+const consoleOutput = document.querySelector('#console-output');
+const originalLog = console.log;
+console.log = function (...args) {
+    originalLog.apply(console, args);
+    const line = document.createElement('div');
+    line.textContent = args.map(a => typeof a === 'object' ? JSON.stringify(a) : String(a)).join(' ');
+    line.style.color = '#4ecca3';
+    consoleOutput.appendChild(line);
+};
+
+// ═══════════════════════════════════════════
+// WARM-UP: Mood Checker (TODOs 1–3)
+// ═══════════════════════════════════════════
+
+// TODO 1: Add a click event listener to moodBtn.
+//         Inside, grab the value from moodInput,
+//         convert it to lowercase, and store in a variable called "mood".
+
+const moodBtn = document.querySelector('#mood-Btn');
+const moodInput = document.querySelector('#mood-input');
+const moodResult = document.querySelector('#mood-result');
+
+moodBtn.addEventListener('click', (e) => {
+    const mood = moodInput.value.toLowerCase().trim();
+    let message = "";
+    switch (mood) {
+        case "happy":
+            message = "😊 Glad to hear it!";
+            break;
+        case "sad":
+            message = "😢 Hope your day gets better!";
+            break;
+        case "angry":
+            message = "😤 Take a deep breath!";
+            break;
+        default:
+            message = "🤔 Interesting mood!";
+            break;
+    }
+    moodResult.textContent = message;
+})
+
+// TODO 2: Use a switch statement on "mood".
+//         Cases: "happy" → "😊 Glad to hear it!"
+//                "sad"   → "😢 Hope your day gets better!"
+//                "angry" → "😤 Take a deep breath!"
+//         Default:        → "🤔 Interesting mood!"
+//         Store the result in a variable called "message".
+// YOUR CODE HERE
+
+// TODO 3: Set moodResult.textContent to the message.
+// YOUR CODE HERE
+
+
+// ═══════════════════════════════════════════
+// SECTION 1: The for Loop (TODOs 4–6)
+// ═══════════════════════════════════════════
+console.log('── Section 1: for Loop ──');
+
+// TODO 4: Write a for loop that counts from 1 to 5.
+//         Inside the loop, log each number to the console.
+
+for (let i = 0; i < 5; i--) {
+    console.log(`number is: ${i}`);
+}
+
+// TODO 5: Write a for loop that counts DOWN from 10 to 1.
+//         Log each number. Use i-- to decrement.
+
+for (let i = 10; i > 0; i--) {
+    console.log(`number is: ${i}`);
+}
+
+// TODO 6: Write a for loop that prints only EVEN numbers from 2 to 20.
+//         Hint: start at 2 and increment by 2 (i += 2).
+
+for (let i = 2; i <= 20; i+=2) {
+    console.log(`number is: ${i}`);
+}
+
+// ═══════════════════════════════════════════
+// SECTION 2: The while Loop (TODOs 7–8)
+// ═══════════════════════════════════════════
+console.log('── Section 2: while Loop ──');
+
+// TODO 7: Create a variable "countdown" set to 5.
+//         Write a while loop that logs "T-minus {countdown}..."
+//         and decrements countdown each iteration.
+//         After the loop, log "🚀 Liftoff!"
+
+let count = 5;
+while(count >= 0) {
+    console.log(`number is: ${count}`);
+    count--;
+}
+
+// TODO 8: Simulated dice roller!
+//         Create a variable "roll" set to 0 and "attempts" set to 0.
+//         Use a while loop that keeps rolling until roll === 6.
+//         Inside: roll = Math.ceil(Math.random() * 6); attempts++;
+//         After the loop, log how many attempts it took.
+
+let roll = 0;
+let attempts = 0;
+while(roll !== 6) {
+    roll = Math.ceil(Math.random() * 6);
+    attempts++;
+}
+console.log(`Attempts: ${attempts}`)
+
+// ═══════════════════════════════════════════
+// SECTION 3: The for...of Loop (TODOs 9–10)
+// ═══════════════════════════════════════════
+console.log('── Section 3: for...of Loop ──');
+
+const fruits = ["apple", "banana", "cherry", "dragonfruit"];
+
+// TODO 9: Write a for...of loop that logs each fruit.
+//         Use: for (const fruit of fruits) { ... }
+
+for (const fruit of fruits) {
+    console.log(fruit);
+}
+
+const scores = [88, 92, 75, 100, 67];
+
+// TODO 10: Use a for...of loop to calculate the TOTAL of all scores.
+//          Create a variable "total" set to 0 before the loop.
+//          Inside the loop, add each score to total.
+//          After the loop, log the total AND the average (total / scores.length).
+
+let sum = 0;
+for (const score of scores) {
+    sum += score;
+}
+console.log(sum / scores.length);
+
+// CUTE way
+const funSum = scores.reduce((acc, val) => {
+    return acc + val;
+})
+
+const avg = funSum / score.length;
+
+// ═══════════════════════════════════════════
+// SECTION 4: Iterating Arrays by Index (TODO 11)
+// ═══════════════════════════════════════════
+console.log('── Section 4: Array by Index ──');
+
+const students = ["Alice", "Bob", "Charlie", "Diana"];
+
+// TODO 11: Write a for loop that logs each student WITH their number.
+//          Output: "1. Alice", "2. Bob", "3. Charlie", "4. Diana"
+//          Hint: use template literals and (i + 1) for the number.
+
+for (let i = 0; i < students.length; i++) {
+    console.log(`${i + 1}. ${students[i]}`);
+}
+
+// ═══════════════════════════════════════════
+// SECTION 5: break and continue (TODOs 12–13)
+// ═══════════════════════════════════════════
+console.log('── Section 5: break & continue ──');
+
+// TODO 12: Use a for loop (1 to 10). If i === 5, BREAK out of the loop.
+//          Log each number. You should see 1, 2, 3, 4 only.
+
+for (let i = 1; i <= 10; i++) {
+    if (i === 5) {
+        break;
+    }
+    console.log(i)
+}
+
+// TODO 13: Use a for loop (1 to 10). If i is even, CONTINUE (skip it).
+//          Log each number. You should see 1, 3, 5, 7, 9 only.
+
+for (let i = 1; i <= 10; i++) {
+    if (i % 2 === 0) {
+        continue;
+    }
+    console.log(i)
+}
+
+// ═══════════════════════════════════════════
+// SECTION 6: DOM Manipulation with Loops (TODOs 14–15)
+// ═══════════════════════════════════════════
+console.log('── Section 6: DOM + Loops ──');
+
+const colors = ["Crimson", "SteelBlue", "MediumSeaGreen", "Gold", "Orchid"];
+const colorList = document.querySelector('#color-list');
+
+// TODO 14: Use a for...of loop to create a <div> for each color.
+//          For each color:
+//            1. Create a div:      const div = document.createElement('div');
+//            2. Set its text:       div.textContent = color;
+//            3. Set its background: div.style.backgroundColor = color;
+//            4. Add a class:        div.classList.add('color-swatch');
+//            5. Append to list:     colorList.appendChild(div);
+// YOUR CODE HERE
+
+const tasks = [
+    {text: "Read chapter 5", done: true},
+    {text: "Finish homework", done: false},
+    {text: "Study for quiz", done: false},
+    {text: "Clean desk", done: true},
+];
+const taskList = document.querySelector('#task-list');
+
+// TODO 15: Use a for...of loop to create a <div> for each task.
+//          For each task:
+//            1. Create a div element.
+//            2. Set textContent to task.text
+//            3. Add class 'task-item'
+//            4. If task.done is true, ALSO add class 'completed'
+//            5. Append to taskList
+// YOUR CODE HERE
+
+
+// ═══════════════════════════════════════════
+// BONUS: Nested Loops (TODO 16)
+// ═══════════════════════════════════════════
+
+// TODO 16 (BONUS): Create a multiplication table!
+//   Use two nested for loops (outer: row 1-5, inner: col 1-5).
+//   Build a string for each row: "1x1=1  1x2=2  1x3=3 ..."
+//   Log each row.
+// YOUR CODE HERE
