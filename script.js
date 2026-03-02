@@ -200,6 +200,14 @@ const colorList = document.querySelector('#color-list');
 //            5. Append to list:     colorList.appendChild(div);
 // YOUR CODE HERE
 
+for (const color of colors) {
+    const div = document.createElement('div');
+    div.textContent = color;
+    div.style.backgroundColor = color.toLowerCase();
+    div.classList.add("Color-Swatch");
+    colorList.append(div);
+}
+
 const tasks = [
     {text: "Read chapter 5", done: true},
     {text: "Finish homework", done: false},
@@ -216,6 +224,16 @@ const taskList = document.querySelector('#task-list');
 //            4. If task.done is true, ALSO add class 'completed'
 //            5. Append to taskList
 // YOUR CODE HERE
+
+for (const task of tasks) {
+    const div = document.createElement('div');
+    div.textContent = task.text;
+    div.classList.add("task-item")
+    if (task.done) {
+        div.classList.add("completed");
+    }
+    taskList.append(div);
+}
 
 
 // ═══════════════════════════════════════════
